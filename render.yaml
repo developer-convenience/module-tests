@@ -1,0 +1,25 @@
+# Render Blueprint — API 서버 (Express)
+# Dashboard > New > Blueprint > 이 파일이 있는 repo 연결
+
+services:
+  - type: web
+    name: leather-shop-api
+    runtime: node
+    rootDir: leather-shop
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: TOSS_SECRET_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false

@@ -36,7 +36,29 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 
 
-app.use(cors({ origin: true }));
+function createCorsOptions() {
+  const raw = process.env.ALLOWED_ORIGINS?.trim();
+  if (!raw) {
+    return { origin: true };
+  }
+
+  const allowed = raw
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  return {
+    origin(origin, callback) {
+      if (!origin || allowed.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+      callback(new Error(`CORS blocked: ${origin}`));
+    },
+  };
+}
+
+app.use(cors(createCorsOptions()));
 
 app.use(express.json());
 

@@ -1,0 +1,9 @@
+# Netlify: leather-shop 프론트엔드만 배포
+# Site settings > Build & deploy > Base directory: leather-shop
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"

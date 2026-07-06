@@ -1,5 +1,7 @@
 import type { Session } from "@supabase/supabase-js";
 
+import { apiUrl } from "./apiBase";
+
 async function parseApiResponse<T>(res: Response): Promise<T> {
   const contentType = res.headers.get("content-type") ?? "";
   const text = await res.text();
@@ -8,7 +10,7 @@ async function parseApiResponse<T>(res: Response): Promise<T> {
     const trimmed = text.trimStart();
     if (trimmed.startsWith("<!") || trimmed.startsWith("<!DOCTYPE")) {
       throw new Error(
-        "API 서버에 연결할 수 없습니다. 개발 환경에서는 npm run dev:all 로 실행해 주세요.",
+        "API 서버에 연결할 수 없습니다. 로컬에서는 npm run dev:all, 배포 환경에서는 VITE_API_BASE_URL을 확인해 주세요.",
       );
     }
     throw new Error("서버 응답 형식이 올바르지 않습니다.");
@@ -33,7 +35,7 @@ export async function apiFetch<T>(
   options: RequestInit & { token?: string | null } = {},
 ): Promise<T> {
   const { token, headers, ...rest } = options;
-  const res = await fetch(path, {
+  const res = await fetch(apiUrl(path), {
     ...rest,
     headers: {
       "Content-Type": "application/json",
@@ -54,7 +56,7 @@ export async function adminFetch<T>(
   password: string,
   options: RequestInit = {},
 ): Promise<T> {
-  const res = await fetch(path, {
+  const res = await fetch(apiUrl(path), {
     ...options,
     headers: {
       "Content-Type": "application/json",
