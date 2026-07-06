@@ -1,0 +1,33 @@
+.ls-checkout-page {
+  padding-top: 6rem;
+  min-height: 100vh;
+  background: var(--ls-bg);
+}
+
+.ls-checkout-page > .ls-container {
+  padding-bottom: var(--ls-section-y);
+}
+
+.ls-checkout-page__back {
+  margin-bottom: 2rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.ls-checkout-page__title {
+  font-size: clamp(2.25rem, 5vw, 3rem);
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .ls-checkout-page {
+    padding-top: 5rem;
+  }
+
+  .ls-checkout-page__title {
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+    margin-bottom: 1.75rem;
+  }
+}

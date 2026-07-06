@@ -1,0 +1,71 @@
+.ls-order-status__steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ls-order-status__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  color: var(--ls-secondary);
+  font-size: 0.75rem;
+}
+
+.ls-order-status__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 2px solid var(--ls-border);
+  background: var(--ls-surface);
+}
+
+.ls-order-status__step.is-done .ls-order-status__dot {
+  border-color: var(--ls-accent);
+  background: var(--ls-accent);
+}
+
+.ls-order-status__step.is-active .ls-order-status__label {
+  color: var(--ls-heading);
+  font-weight: 600;
+}
+
+.ls-order-status__badge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--ls-border);
+  background: var(--ls-surface);
+}
+
+.ls-order-status__badge--paid {
+  border-color: #c4a77d;
+}
+
+.ls-order-status__badge--making {
+  border-color: var(--ls-accent);
+  color: var(--ls-accent);
+}
+
+.ls-order-status__badge--preparing {
+  border-color: #5c7a8b;
+  color: #5c7a8b;
+}
+
+.ls-order-status__badge--delivered {
+  border-color: #4a6b4a;
+  color: #4a6b4a;
+}
+
+@media (max-width: 768px) {
+  .ls-order-status__steps {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 1rem;
+  }
+}

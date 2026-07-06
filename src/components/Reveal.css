@@ -1,0 +1,35 @@
+.ls-reveal {
+  opacity: 0;
+}
+
+.ls-reveal--up {
+  transform: translateY(1.5rem);
+}
+
+.ls-reveal--left {
+  transform: translateX(-1.5rem);
+}
+
+.ls-reveal--right {
+  transform: translateX(1.5rem);
+}
+
+.ls-reveal--visible.ls-reveal--up {
+  animation: ls-fade-up 0.9s var(--ls-ease-out) var(--ls-reveal-delay, 0s) both;
+}
+
+.ls-reveal--visible.ls-reveal--left {
+  animation: ls-reveal-from-left 0.9s var(--ls-ease-out) var(--ls-reveal-delay, 0s) both;
+}
+
+.ls-reveal--visible.ls-reveal--right {
+  animation: ls-reveal-from-right 0.9s var(--ls-ease-out) var(--ls-reveal-delay, 0s) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}

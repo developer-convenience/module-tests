@@ -1,0 +1,64 @@
+.ls-editorial {
+  padding-block: var(--ls-section-y);
+  background: var(--ls-bg);
+}
+
+.ls-editorial:nth-child(even) {
+  background: var(--ls-surface);
+}
+
+.ls-editorial__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.ls-editorial--reversed .ls-editorial__inner {
+  direction: rtl;
+}
+
+.ls-editorial--reversed .ls-editorial__inner > * {
+  direction: ltr;
+}
+
+.ls-editorial__text {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3.5vw, 2.25rem);
+}
+
+.ls-editorial__title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.ls-editorial__body {
+  margin: 0;
+  max-width: 32rem;
+  color: var(--ls-text);
+  line-height: 1.9;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 768px) {
+  .ls-editorial__inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .ls-editorial--reversed .ls-editorial__inner {
+    direction: ltr;
+  }
+
+  .ls-editorial__title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .ls-editorial__body {
+    font-size: 0.9375rem;
+    line-height: 1.8;
+  }
+}

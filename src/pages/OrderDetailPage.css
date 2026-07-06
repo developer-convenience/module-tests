@@ -1,0 +1,122 @@
+.ls-order-detail {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5rem;
+}
+
+.ls-order-detail__inner {
+  flex: 1;
+  padding-block: clamp(2rem, 8vw, 4rem);
+  max-width: 720px;
+}
+
+.ls-order-detail__back {
+  margin-bottom: 2rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.ls-order-detail__title {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  margin-bottom: 0.5rem;
+}
+
+.ls-order-detail__meta {
+  margin: 0 0 2rem;
+  font-size: 0.875rem;
+  color: var(--ls-secondary);
+}
+
+.ls-order-detail__meta span {
+  color: var(--ls-heading);
+  font-family: monospace;
+  font-size: 0.8125rem;
+}
+
+.ls-order-detail__section {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--ls-border);
+}
+
+.ls-order-detail__section:last-child {
+  border-bottom: none;
+}
+
+.ls-order-detail__section h2 {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.ls-order-detail__status,
+.ls-order-detail__error {
+  margin: 0 0 1rem;
+  color: var(--ls-secondary);
+}
+
+.ls-order-detail__error {
+  color: #8b2e2e;
+}
+
+.ls-order-detail__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ls-order-detail__items li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--ls-border);
+}
+
+.ls-order-detail__items li:last-child {
+  border-bottom: none;
+}
+
+.ls-order-detail__item-title {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+.ls-order-detail__item-sub {
+  margin: 0.25rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--ls-secondary);
+}
+
+.ls-order-detail__item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.ls-order-detail__dl {
+  margin: 0;
+}
+
+.ls-order-detail__dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9375rem;
+}
+
+.ls-order-detail__dl dt {
+  color: var(--ls-secondary);
+  flex-shrink: 0;
+}
+
+.ls-order-detail__dl dd {
+  margin: 0;
+  text-align: right;
+}

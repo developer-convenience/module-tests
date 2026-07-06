@@ -1,0 +1,45 @@
+.ls-social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ls-social-login__notice {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--ls-secondary);
+  line-height: 1.6;
+}
+
+.ls-social-login__btn {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  border: 1px solid var(--ls-border);
+  border-radius: 2px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition:
+    opacity var(--ls-transition),
+    transform var(--ls-transition);
+}
+
+.ls-social-login__btn:hover {
+  opacity: 0.92;
+}
+
+.ls-social-login__btn--kakao {
+  background: #fee500;
+  border-color: #fee500;
+  color: #191600;
+}
+
+.ls-social-login__btn--naver {
+  background: #03c75a;
+  border-color: #03c75a;
+  color: #fff;
+}
+
+.ls-social-login__btn--google {
+  background: #fff;
+  color: var(--ls-heading);
+}

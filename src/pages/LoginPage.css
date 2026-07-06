@@ -1,0 +1,38 @@
+.ls-login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5rem;
+}
+
+.ls-login-page__inner {
+  flex: 1;
+  max-width: 440px;
+  padding-block: clamp(2rem, 8vw, 4rem);
+}
+
+.ls-login-page__back {
+  margin-bottom: 2rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.ls-login-page__title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  margin-bottom: 0.75rem;
+}
+
+.ls-login-page__text {
+  margin: 0 0 2rem;
+  color: var(--ls-secondary);
+  line-height: 1.7;
+}
+
+.ls-login-page__hint {
+  margin: 1.5rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--ls-secondary);
+  line-height: 1.6;
+}

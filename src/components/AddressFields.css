@@ -1,0 +1,54 @@
+.ls-address-fields {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.ls-address-fields__legend {
+  display: block;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: var(--ls-heading);
+  padding: 0;
+}
+
+.ls-address-fields__row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+  margin-bottom: 1.25rem;
+}
+
+.ls-address-fields__zonecode {
+  flex: 1;
+  margin-bottom: 0 !important;
+}
+
+.ls-address-fields__search {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding-inline: 1.25rem;
+}
+
+.ls-address-fields__readonly {
+  background: var(--ls-bg) !important;
+  color: var(--ls-secondary);
+  cursor: default;
+}
+
+.ls-address-fields__jibun {
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .ls-address-fields__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ls-address-fields__search {
+    width: 100%;
+  }
+}

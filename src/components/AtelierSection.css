@@ -1,0 +1,81 @@
+.ls-atelier {
+  background: var(--ls-surface);
+}
+
+.ls-atelier__banner {
+  position: relative;
+}
+
+.ls-atelier__wide.ls-image-slot {
+  aspect-ratio: 21 / 9;
+  max-height: 50vh;
+}
+
+.ls-atelier__banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--ls-overlay);
+}
+
+.ls-atelier__banner-text {
+  position: absolute;
+  bottom: clamp(2rem, 5vw, 4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--ls-container);
+  color: var(--ls-surface);
+  text-align: center;
+}
+
+.ls-atelier__banner-text .ls-eyebrow {
+  color: var(--ls-secondary);
+}
+
+.ls-atelier__title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  color: var(--ls-surface);
+  margin-top: 0.5rem;
+}
+
+.ls-atelier__body {
+  display: grid;
+  grid-template-columns: minmax(200px, 320px) 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-block: var(--ls-section-y);
+  align-items: start;
+}
+
+.ls-atelier__story-title {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  margin-bottom: 1.25rem;
+}
+
+.ls-atelier__story p {
+  margin: 0 0 1.25rem;
+  line-height: 1.75;
+  max-width: 36rem;
+}
+
+@media (max-width: 768px) {
+  .ls-atelier__body {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .ls-atelier__portrait {
+    max-width: 100%;
+  }
+
+  .ls-atelier__wide.ls-image-slot {
+    aspect-ratio: 16 / 10;
+    max-height: 40vh;
+  }
+
+  .ls-atelier__banner-text {
+    width: calc(100% - 2rem);
+  }
+
+  .ls-atelier__title {
+    font-size: clamp(1.5rem, 6vw, 2.25rem);
+  }
+}

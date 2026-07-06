@@ -1,0 +1,55 @@
+.ls-page {
+  padding-top: 4.5rem;
+  min-height: 100vh;
+  background: var(--ls-bg);
+  animation: ls-fade-in 0.5s var(--ls-ease-out) both;
+}
+
+.ls-page__body {
+  padding-bottom: var(--ls-section-y);
+}
+
+.ls-page__header {
+  text-align: center;
+  padding: clamp(3rem, 8vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem);
+}
+
+.ls-page__title {
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  margin-top: 0.75rem;
+}
+
+.ls-page__back {
+  display: inline-flex;
+  margin-bottom: 2rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.ls-page__intro {
+  max-width: 36rem;
+  margin: 1rem auto 0;
+  line-height: 1.85;
+  color: var(--ls-text);
+}
+
+@media (max-width: 768px) {
+  .ls-page {
+    padding-top: 3.75rem;
+  }
+
+  .ls-page__header {
+    padding: clamp(2rem, 6vw, 3rem) 0 clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .ls-page__title {
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+  }
+
+  .ls-page__intro {
+    font-size: 0.9375rem;
+    padding-inline: 0.25rem;
+  }
+}

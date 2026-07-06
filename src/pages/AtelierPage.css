@@ -1,0 +1,17 @@
+.ls-atelier-page__hero {
+  margin-bottom: var(--ls-section-y);
+}
+
+.ls-atelier-page__hero .ls-image-slot {
+  max-height: 50vh;
+}
+
+.ls-atelier-page .ls-atelier {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .ls-atelier-page__hero .ls-image-slot {
+    max-height: 35vh;
+  }
+}
