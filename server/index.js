@@ -22,6 +22,7 @@ import {
 
 } from "./orders.js";
 
+import { fetchNaverUserinfo } from "./naver-userinfo.js";
 import { getUserFromRequest, supabaseConfigured } from "./supabase.js";
 
 
@@ -155,6 +156,41 @@ app.get("/api/health", (_req, res) => {
     admin: Boolean(ADMIN_PASSWORD),
 
   });
+
+});
+
+
+
+// Supabase Custom Provider(naver) userinfo 프록시 — 네이버 응답을 OIDC 표준 형식으로 변환
+app.get("/api/auth/naver/userinfo", async (req, res) => {
+
+  const authorization = req.headers.authorization;
+
+  if (!authorization) {
+
+    return res.status(401).json({ error: "Missing Authorization header" });
+
+  }
+
+
+
+  try {
+
+    const profile = await fetchNaverUserinfo(authorization);
+
+    return res.json(profile);
+
+  } catch (error) {
+
+    console.error("[auth/naver/userinfo]", error);
+
+    return res.status(error.status ?? 500).json({
+
+      error: error.message ?? "Failed to fetch Naver user profile",
+
+    });
+
+  }
 
 });
 

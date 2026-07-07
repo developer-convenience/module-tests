@@ -69,9 +69,53 @@
 **Authentication → URL Configuration**
 
 - Site URL: `https://<netlify-사이트>.netlify.app`
-- Redirect URLs에 동일 URL 추가
+- Redirect URLs:
+  - `https://<netlify-사이트>.netlify.app/**`
+  - `http://localhost:5173/**` (로컬 개발)
 
 **SQL Editor**에서 `supabase/schema.sql` 실행 (아직 안 했다면)
+
+### 네이버 로그인 (Custom Provider)
+
+Supabase에는 네이버 내장 프로바이더가 없습니다. Custom Provider + userinfo 프록시가 필요합니다.
+
+**1) Render API에 userinfo 프록시 배포**
+
+이 레포의 `server/index.js`에 `/api/auth/naver/userinfo`가 포함되어 있습니다.  
+Render에 API를 배포한 뒤 아래 URL이 동작하는지 확인하세요.
+
+```
+https://<render-api-url>/api/auth/naver/userinfo
+```
+
+(Authorization 헤더 없이 호출하면 `401` — 정상)
+
+**2) Supabase → Authentication → Custom Providers → naver (Manual)**
+
+| 필드 | 값 |
+|------|-----|
+| Configuration | Manual |
+| Issuer URL | `https://nid.naver.com` |
+| Authorization URL | `https://nid.naver.com/oauth2/authorize` |
+| Token URL | `https://nid.naver.com/oauth2/token` |
+| JWKS URI | `https://nid.naver.com/oauth2/jwks` |
+| **Userinfo URL** | `https://<render-api-url>/api/auth/naver/userinfo` |
+| Scopes | `profile` (**`openid` 넣지 않기**) |
+| Client ID / Secret | 네이버 개발자센터 값 |
+
+> Edge Function 대안: `supabase functions deploy naver-userinfo --no-verify-jwt` 후  
+> Userinfo URL을 `https://<project>.supabase.co/functions/v1/naver-userinfo` 로 설정해도 됩니다.
+
+**3) 네이버 개발자센터**
+
+| 필드 | 값 |
+|------|-----|
+| Callback URL | `https://<project>.supabase.co/auth/v1/callback` |
+| API 권한 — 이메일 | **필수 동의** (없으면 Supabase가 사용자 생성 실패) |
+
+**4) 프론트 코드**
+
+네이버는 `custom:naver`로 호출합니다 (`AuthContext.tsx`에 매핑됨).
 
 ---
 
