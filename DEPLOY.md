@@ -47,10 +47,10 @@
 
 1. [netlify.com](https://netlify.com) → GitHub 연동
 2. **Add new site → Import an existing project**
-3. Build settings:
+3. Build settings — **레포 루트 `netlify.toml`이 있으면 UI 설정은 비워 두거나 아래와 맞추세요:**
    - Base directory: `leather-shop`
-   - Build command: `npm run build`
-   - Publish directory: `leather-shop/dist` (Base가 leather-shop이면 `dist`)
+   - Build command: `npm ci && npm run build`
+   - Publish directory: `dist` (⚠️ `leather-shop` 폴더 자체가 아님)
 4. Environment Variables:
 
 | 변수 | 값 |
@@ -103,3 +103,23 @@ npm run dev:all        # 프론트 :5173 + API :3001
 ```
 
 로컬에서는 `VITE_API_BASE_URL`을 설정하지 않습니다 (Vite가 `/api`를 프록시).
+
+---
+
+## 문제 해결
+
+### `MIME type application/octet-stream` / module script 오류
+
+**원인:** Netlify가 **빌드 결과(`dist`)가 아닌 소스**를 배포한 경우입니다.  
+소스 `index.html`은 `<script src="/src/main.tsx">`를 가리키고, Netlify는 `.tsx`를 `application/octet-stream`으로 내려줍니다.
+
+**확인:** 배포된 사이트에서 페이지 소스 보기 → script가 `/src/main.tsx`면 잘못된 배포입니다.  
+정상이면 `/assets/index-xxxxx.js` 형태입니다.
+
+**수정:**
+
+1. Netlify → **Site configuration → Build & deploy → Build settings**
+2. Publish directory를 **`dist`** 로 변경 (Base directory가 `leather-shop`일 때)
+3. `leather-shop` 또는 레포 루트를 publish 하지 않도록 확인
+4. **Trigger deploy → Clear cache and deploy site**
+5. 최신 커밋에 레포 루트 `netlify.toml` 포함 후 push

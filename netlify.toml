@@ -1,8 +1,9 @@
-# Netlify: leather-shop 프론트엔드만 배포
-# Site settings > Build & deploy > Base directory: leather-shop
+# Netlify: leather-shop 프론트엔드
+# 레포 루트의 netlify.toml(base=leather-shop)과 동일 설정.
+# Publish는 반드시 빌드 산출물 dist 여야 합니다. leather-shop 폴더 자체를 publish 하면 MIME 오류가 납니다.
 
 [build]
-  command = "npm run build"
+  command = "npm ci && npm run build"
   publish = "dist"
 
 [build.environment]
