@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
 
 import { supabaseAdmin } from "./supabase.js";
-//test주석22
+//test주석33
 const ORDER_STATUSES = ["paid", "making", "preparing", "delivered"];
 const CLAIM_TTL_MS = 24 * 60 * 60 * 1000;
 
