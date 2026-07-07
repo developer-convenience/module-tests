@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import { images } from "../assets";
@@ -30,21 +30,73 @@ export default function Header({
   const { user, loading } = useAuth();
   const [logoFailed, setLogoFailed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuClosing, setMenuClosing] = useState(false);
+  const [badgePulse, setBadgePulse] = useState(false);
+  const prevCartCount = useRef(cartCount);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    if (cartCount > prevCartCount.current) {
+      setBadgePulse(true);
+      const timer = window.setTimeout(() => setBadgePulse(false), 280);
+      prevCartCount.current = cartCount;
+      return () => window.clearTimeout(timer);
+    }
+    prevCartCount.current = cartCount;
+  }, [cartCount]);
+
+  const menuActive = menuOpen || menuClosing;
+  const menuInteractive = menuOpen && !menuClosing;
+
+  useEffect(() => {
+    document.body.style.overflow = menuActive ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [menuOpen]);
+  }, [menuActive]);
+
+  function finishClose() {
+    setMenuOpen(false);
+    setMenuClosing(false);
+  }
+
+  function closeMenu() {
+    if (!menuOpen || menuClosing) return;
+    const reducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) {
+      finishClose();
+      return;
+    }
+    setMenuClosing(true);
+  }
+
+  function openMenu() {
+    setMenuClosing(false);
+    setMenuOpen(true);
+  }
+
+  function toggleMenu() {
+    if (menuClosing) return;
+    if (menuOpen) {
+      closeMenu();
+      return;
+    }
+    openMenu();
+  }
+
+  function handlePanelTransitionEnd(event: React.TransitionEvent<HTMLElement>) {
+    if (event.propertyName !== "transform" || event.target !== event.currentTarget) return;
+    if (menuClosing) finishClose();
+  }
 
   function handleNavigate(page: Page) {
-    setMenuOpen(false);
+    if (menuOpen) closeMenu();
     onNavigate(page);
   }
 
   function handleAccount() {
-    setMenuOpen(false);
+    if (menuOpen) closeMenu();
     if (user) {
       onMyPage();
       return;
@@ -61,23 +113,27 @@ export default function Header({
       ? createPortal(
           <div
             id="ls-mobile-nav"
-            className={`ls-mobile-menu ${menuOpen ? "is-open" : ""}`}
-            aria-hidden={!menuOpen}
+            className={`ls-mobile-menu ${menuOpen && !menuClosing ? "is-open" : ""} ${menuClosing ? "is-closing" : ""}`.trim()}
+            aria-hidden={!menuActive}
           >
             <button
               type="button"
               className="ls-mobile-menu__backdrop"
-              onClick={() => setMenuOpen(false)}
+              onClick={closeMenu}
               aria-label="메뉴 닫기"
-              tabIndex={menuOpen ? 0 : -1}
+              tabIndex={menuInteractive ? 0 : -1}
             />
-            <nav className="ls-mobile-menu__panel" aria-label="모바일 메뉴">
+            <nav
+              className="ls-mobile-menu__panel"
+              aria-label="모바일 메뉴"
+              onTransitionEnd={handlePanelTransitionEnd}
+            >
               {NAV_ITEMS.map(({ page, label }) => (
                 <button
                   key={page}
                   type="button"
                   onClick={() => handleNavigate(page)}
-                  tabIndex={menuOpen ? 0 : -1}
+                  tabIndex={menuInteractive ? 0 : -1}
                 >
                   {label}
                 </button>
@@ -85,7 +141,7 @@ export default function Header({
               <button
                 type="button"
                 onClick={handleAccount}
-                tabIndex={menuOpen ? 0 : -1}
+                tabIndex={menuInteractive ? 0 : -1}
               >
                 {accountLabel}
               </button>
@@ -93,7 +149,7 @@ export default function Header({
                 type="button"
                 className="ls-mobile-menu__cart"
                 onClick={() => handleNavigate("cart")}
-                tabIndex={menuOpen ? 0 : -1}
+                tabIndex={menuInteractive ? 0 : -1}
               >
                 {cartMenuLabel}
               </button>
@@ -106,7 +162,7 @@ export default function Header({
   return (
     <>
       <header
-        className={`ls-header ${overlay ? "ls-header--overlay" : ""} ${menuOpen ? "ls-header--menu-open" : ""}`}
+        className={`ls-header ${overlay ? "ls-header--overlay" : ""} ${menuActive ? "ls-header--menu-open" : ""}`}
       >
         <div className="ls-header__bar">
           <div className="ls-header__inner">
@@ -172,7 +228,11 @@ export default function Header({
                     <circle cx="17.5" cy="19.5" r="1.25" />
                   </svg>
                   {cartCount > 0 && (
-                    <span className="ls-header__cart-badge">{cartCount}</span>
+                    <span
+                      className={`ls-header__cart-badge${badgePulse ? " ls-header__cart-badge--pulse" : ""}`}
+                    >
+                      {cartCount}
+                    </span>
                   )}
                 </span>
               </button>
@@ -180,10 +240,10 @@ export default function Header({
               <button
                 type="button"
                 className="ls-header__menu-toggle"
-                onClick={() => setMenuOpen((open) => !open)}
-                aria-expanded={menuOpen}
+                onClick={toggleMenu}
+                aria-expanded={menuInteractive}
                 aria-controls="ls-mobile-nav"
-                aria-label={menuOpen ? "메뉴 닫기" : "메뉴 열기"}
+                aria-label={menuInteractive ? "메뉴 닫기" : "메뉴 열기"}
               >
                 <span className="ls-header__menu-icon" aria-hidden="true" />
               </button>

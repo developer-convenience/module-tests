@@ -131,8 +131,8 @@ export default function CheckoutForm({ cart }: CheckoutFormProps) {
       await widgetsRef.current.requestPayment({
         orderId,
         orderName,
-        successUrl: `${origin}?page=checkout-success`,
-        failUrl: `${origin}?page=checkout-fail`,
+        successUrl: `${origin}/checkout/success`,
+        failUrl: `${origin}/checkout/fail`,
         customerName: name,
         customerMobilePhone: phone.replace(/\D/g, ""),
       });

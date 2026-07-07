@@ -1,4 +1,5 @@
 import { formatPrice, getProduct } from "../assets";
+import AddToCartButton from "../components/AddToCartButton";
 import ImageSlot from "../components/ImageSlot";
 import PageShell from "../components/PageShell";
 import "./ProductDetailPage.css";
@@ -73,9 +74,7 @@ export default function ProductDetailPage({
             </dl>
 
             <div className="ls-product-detail__actions">
-              <button type="button" className="ls-btn ls-btn--filled" onClick={onAddToCart}>
-                Add to Cart
-              </button>
+              <AddToCartButton onAdd={onAddToCart} />
               {product.customAvailable && (
                 <button
                   type="button"

@@ -1,0 +1,55 @@
+.ls-add-to-cart {
+  gap: 0.5rem;
+  min-width: 10.5rem;
+  transition:
+    background var(--ls-transition),
+    color var(--ls-transition),
+    border-color var(--ls-transition),
+    opacity var(--ls-transition);
+}
+
+.ls-add-to-cart:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.ls-add-to-cart--added {
+  background: var(--ls-heading) !important;
+  border-color: var(--ls-heading) !important;
+  color: var(--ls-surface) !important;
+}
+
+.ls-add-to-cart--error {
+  border-color: #b33a3a !important;
+  color: #b33a3a !important;
+  background: transparent !important;
+}
+
+.ls-add-to-cart__spinner {
+  width: 1rem;
+  height: 1rem;
+  animation: ls-add-to-cart-spin 0.7s linear infinite;
+}
+
+.ls-add-to-cart__spinner circle {
+  stroke-dasharray: 28;
+  stroke-dashoffset: 10;
+  opacity: 0.85;
+}
+
+.ls-add-to-cart__check {
+  width: 1rem;
+  height: 1rem;
+}
+
+@keyframes ls-add-to-cart-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-add-to-cart__spinner {
+    animation: none;
+  }
+}

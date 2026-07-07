@@ -10,7 +10,13 @@ import {
 import type { Provider, Session, User } from "@supabase/supabase-js";
 
 import { claimPendingOrder } from "../lib/api";
-import { getAuthRedirectUrl, supabase, supabaseConfigured } from "../lib/supabase";
+import {
+  AUTH_URL_CLEANED_EVENT,
+  clearAuthParamsFromUrl,
+  getAuthRedirectUrl,
+  supabase,
+  supabaseConfigured,
+} from "../lib/supabase";
 import type { SocialProvider } from "../types/order";
 
 type AuthContextValue = {
@@ -46,11 +52,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!cancelled) {
         setSession(data.session);
         setLoading(false);
+        if (data.session && clearAuthParamsFromUrl()) {
+          window.dispatchEvent(new CustomEvent(AUTH_URL_CLEANED_EVENT));
+        }
       }
     });
 
     const { data: subscription } = supabase.auth.onAuthStateChange(async (_event, nextSession) => {
       setSession(nextSession);
+
+      if (nextSession && clearAuthParamsFromUrl()) {
+        window.dispatchEvent(new CustomEvent(AUTH_URL_CLEANED_EVENT));
+      }
 
       if (nextSession?.access_token) {
         await claimPendingOrder(nextSession.access_token);

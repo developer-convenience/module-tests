@@ -60,51 +60,19 @@
   animation-delay: 0.3s;
 }
 
+/* Mobile: no scroll animation — instant reveal when observer fires */
 @media (max-width: 768px) {
   .ls-reveal--left,
-  .ls-reveal--right {
-    transform: translate3d(0, 1.5rem, 0);
-  }
-
-  .ls-reveal--visible.ls-reveal--up {
-    animation: ls-fade-up-mobile 0.5s var(--ls-ease-out) var(--ls-reveal-delay, 0s) both;
-  }
-
-  .ls-reveal--visible.ls-reveal--left,
-  .ls-reveal--visible.ls-reveal--right {
-    animation: ls-fade-up-mobile 0.5s var(--ls-ease-out) var(--ls-reveal-delay, 0s) both;
-  }
-
+  .ls-reveal--right,
   .ls-reveal-group__item {
-    transform: translate3d(0, 1rem, 0);
+    transform: none;
   }
 
+  .ls-reveal--visible,
   .ls-reveal-group--visible .ls-reveal-group__item {
-    animation: ls-fade-up-mobile 0.5s var(--ls-ease-out) both;
-  }
-
-  .ls-reveal-group--visible .ls-reveal-group__item:nth-child(1) {
-    animation-delay: 0s;
-  }
-
-  .ls-reveal-group--visible .ls-reveal-group__item:nth-child(2) {
-    animation-delay: 0.04s;
-  }
-
-  .ls-reveal-group--visible .ls-reveal-group__item:nth-child(3) {
-    animation-delay: 0.08s;
-  }
-
-  .ls-reveal-group--visible .ls-reveal-group__item:nth-child(4) {
-    animation-delay: 0.12s;
-  }
-
-  .ls-reveal-group--visible .ls-reveal-group__item:nth-child(5) {
-    animation-delay: 0.16s;
-  }
-
-  .ls-reveal-group--visible .ls-reveal-group__item:nth-child(6) {
-    animation-delay: 0.2s;
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
 
