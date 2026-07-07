@@ -1,6 +1,7 @@
 import { collectionItems, formatPrice } from "../assets";
 import ImageSlot from "./ImageSlot";
 import Reveal from "./Reveal";
+import RevealGroup from "./RevealGroup";
 import "./ProductGrid.css";
 
 type ProductGridProps = {
@@ -19,14 +20,9 @@ export default function ProductGrid({ onSelect, showHeader = true }: ProductGrid
           </Reveal>
         )}
 
-        <ul className="ls-product-grid__list">
-          {collectionItems.map((item, index) => (
-            <Reveal
-              key={item.id}
-              as="li"
-              className="ls-product-grid__item"
-              delay={index * 0.1}
-            >
+        <RevealGroup as="ul" className="ls-product-grid__list">
+          {collectionItems.map((item) => (
+            <li key={item.id} className="ls-product-grid__item ls-reveal-group__item">
               <button type="button" className="ls-product-grid__card" onClick={() => onSelect(item.id)}>
                 <ImageSlot
                   src={item.image}
@@ -40,9 +36,9 @@ export default function ProductGrid({ onSelect, showHeader = true }: ProductGrid
                   <span className="ls-product-grid__price">{formatPrice(item.price)}</span>
                 </div>
               </button>
-            </Reveal>
+            </li>
           ))}
-        </ul>
+        </RevealGroup>
       </div>
     </section>
   );
