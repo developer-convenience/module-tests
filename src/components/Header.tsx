@@ -53,7 +53,8 @@ export default function Header({
   }
 
   const accountLabel = loading ? "…" : user ? "My Page" : "Login";
-  const accountLabelCompact = loading ? "…" : user ? "My" : "Login";
+  const accountAriaLabel = loading ? "로딩 중" : user ? "마이페이지" : "로그인";
+  const cartMenuLabel = cartCount > 0 ? `Cart (${cartCount})` : "Cart";
 
   const mobileMenu =
     typeof document !== "undefined"
@@ -94,7 +95,7 @@ export default function Header({
                 onClick={() => handleNavigate("cart")}
                 tabIndex={menuOpen ? 0 : -1}
               >
-                Cart ({cartCount})
+                {cartMenuLabel}
               </button>
             </nav>
           </div>,
@@ -140,9 +141,15 @@ export default function Header({
                 type="button"
                 className="ls-header__account"
                 onClick={handleAccount}
+                aria-label={accountAriaLabel}
               >
                 <span className="ls-header__account-full">{accountLabel}</span>
-                <span className="ls-header__account-compact">{accountLabelCompact}</span>
+                <span className="ls-header__account-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <circle cx="12" cy="8" r="3.5" />
+                    <path d="M5.5 20.5c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5" />
+                  </svg>
+                </span>
               </button>
               <button
                 type="button"
@@ -150,7 +157,24 @@ export default function Header({
                 onClick={() => handleNavigate("cart")}
                 aria-label={`장바구니 ${cartCount}개`}
               >
-                Cart ({cartCount})
+                <span className="ls-header__cart-full">Cart ({cartCount})</span>
+                <span className="ls-header__cart-icon-wrap" aria-hidden="true">
+                  <svg
+                    className="ls-header__cart-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  >
+                    <path d="M6 6h15l-1.5 9H7.5L6 6Z" />
+                    <path d="M6 6 5 3H2" />
+                    <circle cx="9.5" cy="19.5" r="1.25" />
+                    <circle cx="17.5" cy="19.5" r="1.25" />
+                  </svg>
+                  {cartCount > 0 && (
+                    <span className="ls-header__cart-badge">{cartCount}</span>
+                  )}
+                </span>
               </button>
 
               <button

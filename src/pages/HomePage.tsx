@@ -8,9 +8,18 @@ import Footer from "../components/Footer";
 type HomePageProps = {
   onDiscover: () => void;
   onProductSelect: (productId: string) => void;
+  onShop: () => void;
+  onCustom: () => void;
+  onAtelier: () => void;
 };
 
-export default function HomePage({ onDiscover, onProductSelect }: HomePageProps) {
+export default function HomePage({
+  onDiscover,
+  onProductSelect,
+  onShop,
+  onCustom,
+  onAtelier,
+}: HomePageProps) {
   return (
     <main>
       <Hero onDiscover={onDiscover} />
@@ -21,6 +30,7 @@ export default function HomePage({ onDiscover, onProductSelect }: HomePageProps)
         eyebrow="New In"
         title="Explore what's new"
         body="새로운 시즌 컬렉션은 공방의 일상에서 시작됩니다. 재단된 가죽 조각, 실밥의 색, 손끝의 온기까지 — 제품이 완성되기 전의 순간들을 담았습니다."
+        onCtaClick={onShop}
       />
       <EditorialBlock
         imageSrc={images.editorial02}
@@ -29,10 +39,11 @@ export default function HomePage({ onDiscover, onProductSelect }: HomePageProps)
         eyebrow="Personalisation"
         title="Made uniquely yours"
         body="모노그램 각인, 스티치 컬러, 가죽 선택까지. 주문제작은 대화에서 시작됩니다. 당신만의 한 점을 함께 설계해 드립니다."
+        onCtaClick={onCustom}
         reversed
       />
       <ProductGrid onSelect={onProductSelect} />
-      <AtelierSection />
+      <AtelierSection onVisitAtelier={onAtelier} />
       <Footer />
     </main>
   );

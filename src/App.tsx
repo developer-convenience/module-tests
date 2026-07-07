@@ -54,6 +54,8 @@ import OrderDetailPage from "./pages/OrderDetailPage";
 
 import AdminPage from "./pages/AdminPage";
 
+import { NavProvider } from "./context/NavContext";
+
 import type { AppRoute, Page } from "./routes";
 
 
@@ -410,6 +412,8 @@ export default function App() {
 
   return (
 
+    <NavProvider onNavigate={handleNav}>
+
     <div className="leather-shop">
 
       {!hideHeader ? (
@@ -432,7 +436,13 @@ export default function App() {
 
       {route.page === "home" && (
 
-        <HomePage onDiscover={scrollToShop} onProductSelect={goProduct} />
+        <HomePage
+          onDiscover={scrollToShop}
+          onProductSelect={goProduct}
+          onShop={goShop}
+          onCustom={goCustom}
+          onAtelier={goAtelier}
+        />
 
       )}
 
@@ -571,6 +581,8 @@ export default function App() {
       {route.page === "admin" ? <AdminPage onBack={goHome} /> : null}
 
     </div>
+
+    </NavProvider>
 
   );
 

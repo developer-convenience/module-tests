@@ -18,15 +18,21 @@
 
   --ls-section-y: clamp(4rem, 10vw, 7.5rem);
   --ls-container: min(1200px, calc(100% - 3rem));
+  --ls-gutter: 1.5rem;
   --ls-transition: 0.25s ease;
   --ls-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
   --ls-bp-mobile: 768px;
 }
 
+html {
+  overflow-x: clip;
+}
+
 @media (max-width: 768px) {
   :root {
     --ls-container: min(1200px, calc(100% - 2rem));
+    --ls-gutter: 1rem;
     --ls-section-y: clamp(3rem, 8vw, 5rem);
   }
 
@@ -54,6 +60,7 @@
 
 body {
   margin: 0;
+  overflow-x: clip;
   background: var(--ls-bg);
   color: var(--ls-text);
   font-family: var(--ls-font-sans);
@@ -64,6 +71,7 @@ body {
 
 .leather-shop {
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 .leather-shop h1,
@@ -128,6 +136,15 @@ body {
   border-bottom: 1px solid currentColor;
   padding-bottom: 0.15rem;
   transition: color var(--ls-transition);
+}
+
+.leather-shop button.ls-link {
+  background: none;
+  border: none;
+  border-bottom: 1px solid currentColor;
+  padding: 0;
+  padding-bottom: 0.15rem;
+  color: inherit;
 }
 
 .leather-shop .ls-link:hover {

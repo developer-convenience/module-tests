@@ -26,6 +26,18 @@
   animation: ls-reveal-from-right 0.9s var(--ls-ease-out) var(--ls-reveal-delay, 0s) both;
 }
 
+@media (max-width: 768px) {
+  .ls-reveal--left,
+  .ls-reveal--right {
+    transform: translateY(1.5rem);
+  }
+
+  .ls-reveal--visible.ls-reveal--left,
+  .ls-reveal--visible.ls-reveal--right {
+    animation: ls-fade-up 0.9s var(--ls-ease-out) var(--ls-reveal-delay, 0s) both;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ls-reveal {
     opacity: 1 !important;

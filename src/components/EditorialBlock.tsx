@@ -10,6 +10,7 @@ type EditorialBlockProps = {
   title: string;
   body: string;
   ctaLabel?: string;
+  onCtaClick?: () => void;
   reversed?: boolean;
 };
 
@@ -21,6 +22,7 @@ export default function EditorialBlock({
   title,
   body,
   ctaLabel = "Discover",
+  onCtaClick,
   reversed = false,
 }: EditorialBlockProps) {
   return (
@@ -45,7 +47,11 @@ export default function EditorialBlock({
           <p className="ls-eyebrow">{eyebrow}</p>
           <h2 className="ls-editorial__title">{title}</h2>
           <p className="ls-editorial__body" lang="ko">{body}</p>
-          <span className="ls-link">{ctaLabel} →</span>
+          {onCtaClick ? (
+            <button type="button" className="ls-link" onClick={onCtaClick}>
+              {ctaLabel} →
+            </button>
+          ) : null}
         </Reveal>
       </div>
     </section>

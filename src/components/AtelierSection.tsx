@@ -3,7 +3,11 @@ import ImageSlot from "./ImageSlot";
 import Reveal from "./Reveal";
 import "./AtelierSection.css";
 
-export default function AtelierSection() {
+type AtelierSectionProps = {
+  onVisitAtelier?: () => void;
+};
+
+export default function AtelierSection({ onVisitAtelier }: AtelierSectionProps) {
   return (
     <section className="ls-atelier" id="atelier">
       <Reveal className="ls-atelier__banner">
@@ -18,6 +22,15 @@ export default function AtelierSection() {
         <div className="ls-atelier__banner-text ls-container">
           <p className="ls-eyebrow">Craft Beyond Borders</p>
           <h2 className="ls-atelier__title">Cut · Edge · Stitch · Finish</h2>
+          {onVisitAtelier ? (
+            <button
+              type="button"
+              className="ls-link ls-atelier__visit"
+              onClick={onVisitAtelier}
+            >
+              공방 둘러보기 →
+            </button>
+          ) : null}
         </div>
       </Reveal>
 
@@ -40,7 +53,11 @@ export default function AtelierSection() {
             Maison의 heritage가 브랜드의 시작이라면, 우리는 Atelier
             손끝에서 이어지는 이야기를 전합니다.
           </p>
-          <span className="ls-link">공방 둘러보기 →</span>
+          {onVisitAtelier ? (
+            <button type="button" className="ls-link" onClick={onVisitAtelier}>
+              공방 둘러보기 →
+            </button>
+          ) : null}
         </Reveal>
       </div>
     </section>
