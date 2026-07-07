@@ -188,7 +188,7 @@ export default function CheckoutForm({ cart }: CheckoutFormProps) {
           </div>
         </section>
 
-        <section className="ls-checkout-form__section">
+        <section className="ls-checkout-form__section ls-checkout-form__section--payment">
           <h2 className="ls-checkout-form__heading">결제 수단</h2>
           {!CLIENT_KEY ? (
             <p className="ls-checkout-form__notice ls-checkout-form__notice--warn">

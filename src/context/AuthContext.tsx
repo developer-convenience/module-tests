@@ -24,6 +24,12 @@ type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
+const SUPABASE_OAUTH_PROVIDERS: Record<SocialProvider, Provider> = {
+  google: "google",
+  kakao: "kakao",
+  naver: "custom:naver" as Provider,
+};
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(supabaseConfigured);
   const [session, setSession] = useState<Session | null>(null);
@@ -64,7 +70,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: provider as Provider,
+      provider: SUPABASE_OAUTH_PROVIDERS[provider],
       options: {
         redirectTo: getAuthRedirectUrl(),
       },

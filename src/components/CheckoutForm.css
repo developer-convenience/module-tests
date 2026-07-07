@@ -9,6 +9,10 @@
   min-width: 0;
 }
 
+.ls-checkout-form__section {
+  min-width: 0;
+}
+
 .ls-checkout-form__main .ls-checkout-form__section {
   margin-bottom: 2.5rem;
 }
@@ -59,8 +63,11 @@
 }
 
 .ls-checkout-form__widget {
+  width: 100%;
+  max-width: 100%;
   margin-bottom: 1rem;
   min-height: 2rem;
+  overflow: visible;
 }
 
 .ls-checkout-form__notice--warn {
@@ -82,6 +89,7 @@
 }
 
 .ls-checkout-form__summary {
+  min-width: 0;
   padding: 2rem;
   background: var(--ls-surface);
   border: 1px solid var(--ls-border);
@@ -146,6 +154,17 @@
   .ls-checkout-form {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  /* 토스 위젯 오버레이가 컨테이너 기준으로 중앙 정렬되므로 뷰포트 전체 너비로 확장 */
+  .ls-checkout-form__section--payment {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-inline: max(1rem, env(safe-area-inset-left, 0px))
+      max(1rem, env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
   }
 
   .ls-checkout-form__summary {
