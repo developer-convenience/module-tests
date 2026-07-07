@@ -48,7 +48,7 @@ export default function EditorialBlock({
           <h2 className="ls-editorial__title">{title}</h2>
           <p className="ls-editorial__body" lang="ko">{body}</p>
           {onCtaClick ? (
-            <button type="button" className="ls-link" onClick={onCtaClick}>
+            <button type="button" className="ls-link" onClick={() => onCtaClick?.()}>
               {ctaLabel} →
             </button>
           ) : null}
